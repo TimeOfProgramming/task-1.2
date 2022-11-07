@@ -1,4 +1,4 @@
-#!/usr/bin/env node;
+#!/usr/bin/env node
 
 const yargs = require('yargs/yargs');
 
@@ -38,6 +38,7 @@ const dateStr = {
   month,
   date,
 }
+
 const currentMethods = {
   year: ['setFullYear', 'getFullYear'],
   month: ['setMonth', 'getMonth'],
