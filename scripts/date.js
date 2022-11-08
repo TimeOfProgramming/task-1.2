@@ -27,9 +27,9 @@ const MILLISECONDS_IN_ONE_MINUTE = 60000;
 const currentDate = new Date();
 const tzOffset = currentDate.getTimezoneOffset() * MILLISECONDS_IN_ONE_MINUTE;
 const currentDateISO = (new Date(Date.now() - tzOffset)).toISOString();
-const year = new Date().getFullYear(); 
-const month = new Date().getMonth() + 1; 
-const date = new Date().getDate();
+const year = currentDate.getFullYear(); 
+const month = currentDate.getMonth() + 1; 
+const date = currentDate.getDate();
 const [direction, num] = argv._;
 let dateFlag = null;
   
@@ -67,12 +67,11 @@ if (!dateFlag) {
 
 const calcDate = (direction, dateFlag) => {
   if (!direction || !dateFlag) return;
-  const moduleNum = Math.abs(num) ;
+  const moduleNum = Math.abs(num);
   const currentNum = direction === 'add' ? moduleNum : -moduleNum;
   const [setDate, getDate] = currentMethods[dateFlag];
   currentDate[setDate](currentDate[getDate]() + currentNum);
-  const dateTimeStamp = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()).getTime();
-  const localISOTime = (new Date(dateTimeStamp - tzOffset)).toISOString();
+  const localISOTime = (new Date(currentDate.getTime() - tzOffset)).toISOString();
   console.log(localISOTime)    
 }
 
